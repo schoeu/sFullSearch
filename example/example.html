@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title>search</title>
+    <style type="text/css" rel="stylesheet">
+        .contentLi{
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #F5F5F5;
+        }
+        #searchID{
+            width: 100%;
+            border-radius: 5px;
+            line-height: 20px;
+        }
+    </style>
+    <style type="text/css" rel="stylesheet" id="result"></style>
+</head>
+<body>
+    <div>
+        <input type="search" id="searchID" placeholder="search..."/>
+    </div>
+    <div>
+        <div class="contentLi" data-ser="tom">
+            <p>name:tom</p>
+            <p>content:tom is a boy.</p>
+        </div>
+        <div class="contentLi" data-ser="lily">
+            <p>name:lily</p>
+            <p>content:lily is a girl.</p>
+        </div>
+        <div class="contentLi" data-ser="lucy">
+            <p>name:lucy</p>
+            <p>content:lucy is a girl.</p>
+        </div>
+        <div class="contentLi" data-ser="jack">
+            <p>name:jack</p>
+            <p>content:jack is a boy.</p>
+        </div>
+        <div class="contentLi" data-ser="lori">
+            <p>name:lori</p>
+            <p>content:lori is a boy.</p>
+        </div>
+    </div>
+<script type="text/javascript">
+    /*
+    * className:列表内容块类名
+    * dataName：提供查询的扩展属性名
+    * inputID：输入框的ID
+    * */
+    sFullSearch({
+        className:"contentLi",
+        dataName:"data-ser",
+        inputID:"searchID"
+    });
+
+    function sFullSearch(options){
+        if(options){
+            var className = options.className || argumentsErr(),
+                dataName = options.dataName || argumentsErr(),
+                ipt = options.inputID || argumentsErr();
+        }
+        var styCtt = document.createElement("style");
+        styCtt.type = "text/css";
+        styCtt.rel = "stylesheets";
+        document.head.appendChild(styCtt);
+
+        ipt = document.getElementById(ipt);
+        ipt.addEventListener("input",function(){
+            if(!ipt.value){
+                styCtt.innerHTML = "";
+            }else{
+                styCtt.innerHTML = "."+className+":not(["+dataName+"*="+ipt.value+"]){display:none;}";
+            }
+        });
+        function argumentsErr(){
+            alert("required arguments!");
+        }
+    };
+</script>
+</body>
+</html>
