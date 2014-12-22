@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<ul class="contacts">
+    <li class="searchable" data-index="Ona">
+        <dl>
+            <dt>First Name<dd>Ona
+            <dt>Last Name<dd>Bednar
+            <dt>Email<dd>schamberger.frank@wuckert.com
+            <dt>Phone<dd>1-265-479-1196x714
+        </dl>
+    </li>
+    <li class="searchable" data-index="Newton">
+        <dl>
+            <dt>First Name<dd>Newton
+            <dt>Last Name<dd>Cronin
+            <dt>Email<dd>torphy.dorothea@gmail.com
+            <dt>Phone<dd>(121)644-5577
+        </dl>
+    </li>
+</ul>
+
+<input type="text" placeholder="search" id="search">
+<style id="search_style"></style>
+<script type="text/javascript">
+    var searchStyle = document.getElementById('search_style');
+    document.getElementById('search').addEventListener('input', function() {
+        if (!this.value) {
+            searchStyle.innerHTML = "";
+            return;
+        }
+        searchStyle.innerHTML = ".searchable:not([data-index*=\"" + this.value.toLowerCase() + "\"]) { display: none; }";
+    });
+</script>
+</body>
+</html>
